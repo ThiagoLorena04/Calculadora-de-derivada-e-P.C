@@ -1,31 +1,60 @@
-// Função f(x) = x³ - 6x² + 9x + 1
-// Derivada manual: f'(x) = 3x² - 12x + 9
+function calcularDerivada() {
+  // Pega o que o usuário digitou no campo de input
+  const entrada = document.getElementById("funcao").value;
 
-// Calcula a derivada (pré-definida)
-const derivada = (x) => 3 * x * x - 12 * x + 9;
+  // Cria um objeto que vai permitir substituir o 'x' quando for calcular
+  const scope = { x: 0 };
 
-// Mostra a derivada no HTML
-document.getElementById("derivada").textContent =
-  "Derivada: f'(x) = 3x² - 12x + 9";
+  try {
+    // Deriva a função uma vez usando a biblioteca math.js
+    const derivada = math.derivative(entrada, 'x').toString();
+    document.getElementById("derivada").textContent = derivada;
 
-// Função para encontrar raízes da derivada (pontos críticos)
-function encontrarPontosCriticos() {
-  // Equação: 3x² - 12x + 9 = 0
-  // Fórmula de Bhaskara: ax² + bx + c
-  const a = 3,
-    b = -12,
-    c = 9;
-  const delta = b * b - 4 * a * c;
+    // Deriva de novo para obter a segunda derivada
+    const segunda = math.derivative(derivada, 'x').toString();
+    document.getElementById("segunda").textContent = segunda;
 
-  if (delta < 0) {
-    return "Sem raízes reais.";
+    // Compila a derivada (transforma em função pronta pra testar valores)
+    const expr = math.parse(derivada);
+    const f = expr.compile();
+
+    // Vamos buscar onde a derivada é zero (ponto crítico)
+    const pontos = [];
+    for (let i = -10; i <= 10; i += 0.1) {
+      scope.x = i; // Testa o valor de x no intervalo -10 até 10
+      const valor = f.evaluate(scope); // Calcula o valor da derivada nesse ponto
+      const arredondado = Math.round(valor * 1000) / 1000; // Arredonda pra evitar imprecisão
+
+      if (Math.abs(arredondado) < 0.05) {
+        pontos.push(Number(i.toFixed(2))); // Se estiver próximo de zero, guarda como ponto crítico
+      }
+    }
+
+    // Mostra os pontos críticos encontrados
+    document.getElementById("pontos").textContent = pontos.join(", ");
+
+    // Agora vamos classificar os pontos usando a segunda derivada
+    const segundaExpr = math.parse(segunda).compile();
+    let classifText = "";
+
+    pontos.forEach(ponto => {
+      scope.x = ponto;
+      const val = segundaExpr.evaluate(scope); // Calcula o valor da segunda derivada
+
+      if (val > 0) {
+        classifText += `x = ${ponto}: mínimo local | `;
+      } else if (val < 0) {
+        classifText += `x = ${ponto}: máximo local | `;
+      } else {
+        classifText += `x = ${ponto}: ponto de inflexão | `;
+      }
+    });
+
+    // Exibe a classificação
+    document.getElementById("classificacao").textContent = classifText;
+
+  } catch (err) {
+    alert("Função inválida. Tente algo como: x^2 + 3x - 5");
+    console.error(err);
   }
-
-  const x1 = (-b + Math.sqrt(delta)) / (2 * a);
-  const x2 = (-b - Math.sqrt(delta)) / (2 * a);
-
-  return `Pontos críticos: x = ${x1.toFixed(2)} e x = ${x2.toFixed(2)}`;
 }
-
-// Mostra os pontos críticos no HTML
-document.getElementById("pontos").textContent = encontrarPontosCriticos();

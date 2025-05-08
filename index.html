@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora Derivadas</title>
+  <title>Calculadora de Derivadas</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+  <link rel="stylesheet" href="./css/geral.css">
 </head>
 
 <body>
-  <h1>Análisador de Funções</h1>
-  <p><strong>Função</strong>f(x) = x³ - 6x² + 9x + 1</p>
-  <p id="derivada"></p>
-  <p id="pontos"></p>
+  <div class="container">
+    <h1>Calculadora de Derivadas</h1>
+    <label for="funcao">Digite uma função f(x):</label>
+    <input type="text" id="funcao" placeholder="Ex: x^3 - 10.5x^2 + 30x + 20">
+    <button onclick="calcularDerivada()">Calcular</button>
+
+    <div id="resultados">
+      <p><strong>Derivada:</strong> <span id="derivada"></span></p>
+      <p><strong>Segunda Derivada:</strong> <span id="segunda"></span></p>
+      <p><strong>Pontos Críticos:</strong> <span id="pontos"></span></p>
+      <p><strong>Classificação:</strong> <span id="classificacao"></span></p>
+    </div>
+  </div>
 
   <script src="./JavaCript/script.js"></script>
 </body>
-
 </html>
