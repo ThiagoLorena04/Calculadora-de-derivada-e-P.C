@@ -4,16 +4,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora Derivadas</title>
+  <title>Calculadora de Derivadas</title>
+  <!-- Bibliotecas externas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="./css/geral.css">
 </head>
 
 <body>
-  <h1>Análisador de Funções</h1>
-  <p><strong>Função</strong>f(x) = x³ - 6x² + 9x + 1</p>
-  <p id="derivada"></p>
-  <p id="pontos"></p>
+  <div class="container">
+    <h1>Calculadora de Derivadas</h1>
+    <label for="funcao">Digite uma função f(x):</label>
+    <input type="text" id="funcao" placeholder="Ex: f(x)=x³ - 6x² + 9x + 2">
+    <button>Calcular</button>
 
-  <script src="./JavaCript/script.js"></script>
+    <div id="resultados">
+      <p><strong>Derivada:</strong> <span id="derivada"></span></p>
+      <p><strong>Segunda Derivada:</strong> <span id="segunda"></span></p>
+      <p><strong>Pontos Críticos:</strong> <span id="pontos"></span></p>
+      <p><strong>Classificação:</strong> <span id="classificacao"></span></p>
+    </div>
+
+    <canvas id="grafico" width="800" height="400"></canvas>
+  </div>
+
+  <!-- Script externo -->
+  <script src="./JavaScript/script.js"></script>
 </body>
 
 </html>
