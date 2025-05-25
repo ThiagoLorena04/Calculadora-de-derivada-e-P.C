@@ -89,9 +89,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const classif = pontos.map((p) => {
         const v = secExpr.evaluate({ x: p });
         return v > 0
-          ? `Ponto mínimo: ${p}`
+          ? `Ponto de mínimo: ${p}`
           : v < 0
-          ? `Ponto máximo: ${p}`
+          ? `Ponto de máximo: ${p}`
           : `Inflexão: ${p}`;
       });
       document.getElementById("classificacao").textContent = classif.length

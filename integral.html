@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Integrais</title>
+  <link rel="stylesheet" href="./css/geral.css" />
+
+  <!-- Bibliotecas externas (ordem importa!) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/algebrite@1.4.0/dist/algebrite.bundle-for-browser.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="list-header">
+      <ul>
+        <li><a href="index.html">Derivadas</a></li>
+        <li><a href="integral.html">Integrais</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Calculadora de Integrais</h1>
+
+    <label for="funcao">Digite uma função f(x):</label>
+    <input type="text" id="funcao" placeholder="Ex: x^2 + 3x - 1" />
+
+    <div class="tipo-wrapper">
+      <label for="tipo">Tipo de Integral:</label>
+      <select id="tipo">
+        <option value="indefinida">Indefinida</option>
+        <option value="definida">Definida</option>
+      </select>
+    </div>
+
+    <fieldset id="intervalos" style="display: none;">
+      <legend>Intervalo [a, b]</legend>
+      <label for="a">a:</label>
+      <input type="number" id="a" step="any" placeholder="0" />
+      <label for="b">b:</label>
+      <input type="number" id="b" step="any" placeholder="2" />
+    </fieldset>
+
+    <button id="btn-calcular">Calcular Integral</button>
+
+    <section id="resultado">
+      <p><strong>Integral:</strong> <span id="res-integral"></span></p>
+      <p><strong>Resultado Numérico:</strong> <span id="res-valor"></span></p>
+    </section>
+
+    <canvas id="grafico" width="800" height="400"></canvas>
+  </main>
+
+  <!-- Seu script por último -->
+  <script src="./JavaScript/script-integral.js"></script>
+</body>
+
+</html>
