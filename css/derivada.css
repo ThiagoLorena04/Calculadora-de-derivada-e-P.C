@@ -1,8 +1,38 @@
-.container-derivate {
-  display: inline-block;     
-  background: var(--cor-fundo);
-  margin: 6rem auto 0 auto;  
-  justify-content: center;   
-  padding: 1rem;            
+.grid-content-derivate{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
+
+.input-derivate{ 
+  grid-column: 1 / -1;
+}
+
+#resultados-derivate p{
+  box-sizing:border-box;
+  border-radius:5px;
+  background:var(--cor-fundo-input);
+  font-family:'Poppins',sans-serif;
+  font-size:0.9rem;
+  font-weight:400;
+  width: 100%;
+  padding: 0.6rem 0.5rem 0.6rem 0.5rem;
+  color: var(--cor-texto-input);
+  text-align: left;
+}
+
+.grafic-derivate{
+  display:flex;
+  justify-content:center;
+  margin:2rem 0;
+}
+
+#grafico{
+  background:var(--cor-fundo);
+  width:100%;
+  max-width:600px;
+  height:300px !important;
+  border-radius:8px;
+}
+
 
