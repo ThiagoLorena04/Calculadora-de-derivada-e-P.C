@@ -8,7 +8,7 @@
   <!-- Bibliotecas externas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="./css/geral.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
@@ -16,28 +16,39 @@
   <header>
     <div class="list-header">
       <ul>
-        <li><a href="index.html">Derivadas</a></li>
+        <li><a href="index.html" class="ativo">Derivadas</a></li>
         <li><a href="integral.html">Integrais</a></li>
       </ul>
     </div>
   </header>
-  <div class="container">
-    <h1>Calculadora de Derivadas</h1>
-    <label for="funcao">Digite uma função f(x):</label>
-    <input type="text" id="funcao" placeholder="Ex: x^3 - 10.5x^2 + 30x + 20">
-    <button onclick="calcularDerivada()">Calcular</button>
 
-    <div id="resultados">
-      <p><strong>Derivada:</strong> <span id="derivada"></span></p>
-      <p><strong>Segunda Derivada:</strong> <span id="segunda"></span></p>
-      <p><strong>Pontos Críticos:</strong> <span id="pontos"></span></p>
-      <p><strong>Classificação:</strong> <span id="classificacao"></span></p>
+  
+  <div class="title-h1">
+    <h1>Calculadora de <strong>Derivadas</strong></h1>
+  </div>
+  
+  <div class="container-derivate">
+    <div class="grid-content">
+        <div class="input-derivate">
+          <label class="label" for="funcao">Digite uma função f(x)</label>
+          <input  class="input" type="text" class="placeholder-derivate" id="funcao" placeholder="Ex: f(x) = x² - 4x + 3">
+          <button onclick="calcularDerivada()">Calcular</button>
+        </div>
+
+        <div id="resultados-derivate">
+          <p><strong>Derivada:</strong> <span id="derivada"></span></p>
+          <p><strong>Segunda Derivada:</strong> <span id="segunda"></sp~~an></p>
+          <p><strong>Pontos Críticos:</strong> <span id="pontos"></span></p>
+          <p><strong>Classificação:</strong> <span id="classificacao"></span></p>
+      </div>
     </div>
-
-    <canvas id="grafico" width="800" height="400"></canvas>
   </div>
 
-  <!-- Script externo -->
+
+  <div class="grafic-derivate">
+    <canvas class="grafic-derivate" id="grafico" width="800" height="400"></canvas>
+  </div>
+
   <script src="./JavaScript/script-derivada.js"></script>
 </body>
 

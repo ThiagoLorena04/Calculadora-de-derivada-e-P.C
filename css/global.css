@@ -1,0 +1,47 @@
+:root {
+  --cor-texto: #E0E0E0;
+  --cor-fundo: #CDEAFF;
+}
+
+body{
+    margin: 0px;
+    padding: 0;
+    background: linear-gradient(90deg, #0B2F93, #010920);
+    height: 90vh;
+    text-align: center;
+  }
+
+ul, li{
+    list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+canvas#grafico {
+  background: white;
+  display: block;
+  height: 250px
+}
+
+.title-h1{
+justify-self: center;
+}
+
+.title-h1 h1{
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 2.1rem;
+    padding: 1rem 2rem 1rem 2rem;
+    border-radius: 1.3vh;
+    background: linear-gradient(90deg, #1740B3, #011921);
+    color: var(--cor-texto)
+}
+
+.label{
+  display: block;
+}
+
+

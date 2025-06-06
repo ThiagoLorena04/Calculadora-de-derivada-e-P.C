@@ -5,9 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calculadora de Integrais</title>
-  <link rel="stylesheet" href="./css/geral.css" />
+  <link rel="stylesheet" href="./css/style.css" />
 
-  <!-- Bibliotecas externas (ordem importa!) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/algebrite@1.4.0/dist/algebrite.bundle-for-browser.min.js"></script>
@@ -18,14 +17,15 @@
     <nav class="list-header">
       <ul>
         <li><a href="index.html">Derivadas</a></li>
-        <li><a href="integral.html">Integrais</a></li>
+        <li><a href="integral.html" class="ativo">Integrais</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="container">
-    <h1>Calculadora de Integrais</h1>
-
+  <main class="container-derivate">
+    <div class="title-h1">
+    <h1>Calculadora de <strong>Integrais</strong></h1>
+    </div>
     <label for="funcao">Digite uma função f(x):</label>
     <input type="text" id="funcao" placeholder="Ex: x^2 + 3x - 1" />
 
@@ -55,7 +55,7 @@
     <canvas id="grafico" width="800" height="400"></canvas>
   </main>
 
-  <!-- Seu script por último -->
+
   <script src="./JavaScript/script-integral.js"></script>
 </body>
 

@@ -1,0 +1,32 @@
+.list-header li a{
+  font-size: 1.4rem;
+  color: var(--cor-texto);
+  font-weight: 300;
+}
+
+.list-header ul {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 11rem;
+  margin-top: 1.8rem;
+  gap: 4rem;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+}
+
+.list-header a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: 500;
+  transition: background 0.9s;
+}
+
+.list-header a.ativo {
+  background: #00bfff;
+  color: #ffffff; 
+}
+
+
