@@ -21,10 +21,25 @@
   text-align: left;
 }
 
+.grid-2 p{
+  box-sizing:border-box;
+  border-radius:5px;
+  background:var(--cor-fundo-input);
+  font-family:'Poppins',sans-serif;
+  font-size:0.9rem;
+  font-weight:400;
+  width: 100%;
+  padding: 0.6rem 0.5rem 0.6rem 0.5rem;
+  color: var(--cor-texto-input);
+  text-align: left;
+}
+
+
 .grafic-derivate{
   display:flex;
   justify-content:center;
-  margin:2rem 0;
+  
+  margin-bottom:5rem ;
 }
 
 #grafico{
@@ -33,6 +48,101 @@
   max-width:600px;
   height:300px !important;
   border-radius:8px;
+}
+
+.separator{
+  margin-top: 3rem;
+}
+
+
+@media(max-width: 1130px){
+.input-derivate .input{ 
+  margin: 10px;
+  }
+  header .list-header li a{
+  font-size: 1.3rem;
+  }
+  header .list-header ul {
+    justify-content: center;
+    padding: 0 1rem; 
+    margin: 3rem 0; 
+  } body .container{
+  margin: 2rem auto 0 auto;   
+  } #funcao{
+  font-size: 0.9rem;
+  padding:.75rem 1rem;
+  width: 100%;
+  margin: 0;
+  margin-bottom: 1rem;
+  }
+  .grid-content-derivate{
+    grid-template-columns: 1fr;
+  }
+  .grid-2 {
+  position: relative;
+  }
+  .grid-2::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 0.1rem; 
+  background: #1982ff; 
+  }
+  #resultados-derivate p{
+  margin: 14px auto 0 auto;
+  font-size: 0.8rem;
+  }
+  .grid-2 p{
+  font-size: 0.8rem;
+  }
+  .input-derivate .btn{
+    font-size: 0.880rem;
+  }
+}
+
+@media(max-width: 600px){
+   header .list-header li a{
+    font-size: 1.1rem;
+  } .container .sub-title{
+    font-size: 1.2rem;
+  } body .container{
+  padding: 1.5rem 2.5rem 1.5rem 2.5rem;
+  }.input-derivate .btn{
+    padding: 12px 25px;
+  }.separator .sub-title-grafic{
+    font-size: 1.4rem;
+  }  header .list-header ul {
+    gap: 2rem; 
+  }body .container{
+  padding: 1rem 1.5rem 1.5rem 1.5rem ;
+  margin: 2rem 0;
+  width: 60%;
+  }
+}
+
+@media(max-width: 400px){
+  header .list-header li a{
+  font-size: 0.9rem;
+  }header .list-header ul {
+    justify-content: center;
+    margin: 4rem 0 3rem 0;
+  }body .container{
+  padding: .5rem 1.3rem .5rem 1.3rem ;
+  margin: 2rem 0;
+  width: 70%;
+  }
+  .separator .sub-title-grafic{
+    font-size: 1.3rem;
+  }.container .sub-title{
+    font-size: 1.1rem;
+  }#funcao{
+    font-size: 0.8rem;
+  } #resultados-derivate p{
+  font-size: 0.75rem;
+  } .grid-2 p{
+  font-size: 0.75rem;
+  }
 }
 
 

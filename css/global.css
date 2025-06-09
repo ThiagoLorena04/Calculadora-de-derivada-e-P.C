@@ -27,7 +27,7 @@ a {
 }
 
 canvas#grafico {
-  background: white;
+  background: linear-gradient(90deg, #0B2F93, #010920)white;
   display: block;
   height: 250px
 }
@@ -36,15 +36,16 @@ canvas#grafico {
 justify-self: center;
 }
 
+
 .title-h1 h1{
-    display: block;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
-    font-size: 3.3vh;
-    padding: 1rem 2rem 1rem 2rem;
-    border-radius: 1.3vh;
-    background: linear-gradient(90deg, #1E52DE, #000001);
-    color: var(--cor-texto)
+  display: block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 3.3vh;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 1.3vh;
+  background: linear-gradient(90deg, #1E52DE, #000001);
+  color: var(--cor-texto)
 }
 
 .label{
@@ -58,6 +59,14 @@ justify-self: center;
   margin-bottom: 1.5%;
 }
 
+.sub-title-grafic {
+  font-family: "Poppins", sans-serif;
+  color: var(--cor-texto);
+  font-size: 1.7rem;
+  font-weight: 400;
+  /* margin: 3rem 0 1 0; */
+  text-transform: uppercase;
+}
 .container {
   display: inline-block;     
   background: var(--cor-fundo);
@@ -96,7 +105,7 @@ justify-self: center;
   font-family:'Raleway',sans-serif;
   font-size:1rem;
   font-weight:500;
-   width: 60%;
+  width: 60%;
   color: var(--cor-texto-input);
   padding:.75rem 1rem;
   transition:box-shadow .2s ease;
@@ -110,4 +119,23 @@ justify-self: center;
 .input::placeholder{
   color:#909090;
   font-style:italic;
+}
+
+
+  @media(max-width: 1130px){
+  .title-h1 h1{
+    font-size: 1.4rem;
+  }
+  }
+
+@media(max-width: 600px){
+  .title-h1 h1{
+  font-size: 1.1rem;
+  }
+}
+
+@media(max-width: 400px){
+  .title-h1 h1{
+  font-size: 0.8rem;
+  }
 }

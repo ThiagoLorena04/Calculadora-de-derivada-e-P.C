@@ -5,10 +5,11 @@
 }
 
 .list-header ul {
-  display: flex;
+   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-right: 11rem;
+  padding: 0 2rem;
+  gap: 4rem;
   margin-top: 1.8rem;
   margin-bottom: 3.5rem;
   gap: 4rem;
