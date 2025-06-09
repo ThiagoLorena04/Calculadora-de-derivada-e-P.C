@@ -46,7 +46,7 @@
   border-radius: 0.3rem;
   padding: 0.5rem 1rem;
   font-family: "Raleway", sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   background: #fff;
   color: #222;
   box-shadow: 0 0 0 2px rgba(25,130,255,.3);
@@ -72,7 +72,7 @@
 #intervalos legend {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: .95rem;
   color: var(--cor-texto-input);
   margin-right: 1rem;
 }
@@ -81,14 +81,15 @@
   font-family: "Poppins", sans-serif;
   margin-right: 0.3rem;
   color: var(--cor-texto-input);
-}
+  font-size: .9rem;
+} 
 
 #intervalos input[type="number"] {
   border: 1px solid #ccc;
   border-radius: 0.3rem;
   padding: 0.3rem 0.6rem;
   font-family: "Raleway", sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--cor-texto-input);
   width: 4rem; /* Ajuste conforme necessário */
 }
@@ -176,15 +177,29 @@
     margin: 0;
   }
   .input-integral .btn {
-    width: 50%;
     margin: 0; 
+  } .tipo-wrapper select {
+    font-size: .9rem;
   }
+
+  /* Labels do tipo de integral */
+  .tipo-wrapper label {
+    font-size: .9rem;
+  }  
+  #intervalos label {
+    font-size: .8rem;
+  }
+
+  #intervalos legend {
+    font-size: .9rem;
+  }
+
 }
 
 @media(max-width: 500px){
   .input-integral .btn {
     font-size: 0.8rem !important;
-    padding: 0.45rem 0.195rem !important;
+    padding: .75rem .9rem !important;
   }
    .input-integral .input {
     font-size: 0.8rem;
@@ -192,31 +207,33 @@
 
   /* Select do tipo de integral */
   .tipo-wrapper select {
-    font-size: 0.8rem;
+    font-size: .9rem;
   }
 
   /* Labels do tipo de integral */
   .tipo-wrapper label {
-    font-size: 0.8rem;
+    font-size: .9rem;
   }
 
   /* Resultados: Integral e Resultado Numérico */
   #resultado p,
   #resultado p strong,
   #resultado p span {
-    font-size: 0.8rem;
+    font-size: .785rem;
   }
   #intervalos input[type="number"] {
     width: 2.5rem; 
-    font-size: 0.8rem;
+    font-size: .9rem;
     padding: 0.2rem 0.3rem;
   }
   #intervalos label {
-    font-size: 0.8rem;
+    font-size: .9rem;
   }
-
   #intervalos legend {
-    font-size: 0.9rem;
+    font-size: .9rem;
+  }
+  .grid-content-integral{
+    padding: 0.8rem 0 1rem 0;
   }
 
 }
