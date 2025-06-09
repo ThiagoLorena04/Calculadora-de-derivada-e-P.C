@@ -117,7 +117,14 @@ function plotarGrafico(funcExpr, a = null, b = null) {
     data: {
       labels: xs,
       datasets: [
-        { label: "f(x)", data: ys, borderWidth: 2, fill: false },
+        {
+          label: "f(x)",
+          data: ys,
+          borderColor: "#1982ff", // 🌟 Azul claro como o de derivadas
+          borderWidth: 2,
+          fill: false,
+          pointRadius: 0
+        },
         ...(background
           ? [
               {
@@ -134,7 +141,17 @@ function plotarGrafico(funcExpr, a = null, b = null) {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false, // Igual ao de derivadas!
+      plugins: {
+        legend: { display: false },
+        tooltip: { enabled: false }
+      },
       interaction: { mode: "index", intersect: false },
+      scales: {
+        x: { ticks: { color: '#E0E0E0' }, grid: { color: 'rgba(255,255,255,.05)' } },
+        y: { ticks: { color: '#E0E0E0' }, grid: { color: 'rgba(255,255,255,.05)' } }
+      }
     },
   });
 }
+

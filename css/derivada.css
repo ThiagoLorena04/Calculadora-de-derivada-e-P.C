@@ -38,8 +38,6 @@
 .grafic-derivate{
   display:flex;
   justify-content:center;
-  
-  margin-bottom:5rem ;
 }
 
 #grafico{
@@ -49,11 +47,6 @@
   height:300px !important;
   border-radius:8px;
 }
-
-.separator{
-  margin-top: 3rem;
-}
-
 
 @media(max-width: 1130px){
 .input-derivate .input{ 
