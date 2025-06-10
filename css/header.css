@@ -24,11 +24,19 @@
   color: #ffffff;
   font-weight: 500;
   transition: background 0.9s;
+  border: 1px solid transparent;
+  transition: 0.5s;
+
+
 }
 
 .list-header a.ativo {
   background: #00bfff;
   color: #ffffff; 
+}
+
+.list-header a:hover {
+  border: 1px solid var(--cor-texto);
 }
 
 

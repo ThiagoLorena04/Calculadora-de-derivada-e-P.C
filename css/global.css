@@ -42,18 +42,21 @@ justify-self: center;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 3.3vh;
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 1.1rem 2rem;
   border-radius: 1.3vh;
   background: linear-gradient(90deg, #1E52DE, #000001);
-  color: var(--cor-texto)
+  color: var(--cor-texto);
+  box-shadow: 0 0 0 rgba(0,0,0,0);  
+  transition: padding 0.4s, background 0.4s, box-shadow 0.4s;
+
 }
 
-.title-h1 h1:hover {
+.title-h1 h1:hover{
   background: linear-gradient(90deg, #000001, #1E52DE);
   padding: 1.5rem 2.3rem;
-  transition: 0.4s;
-  box-shadow: 0 8px 15px rgba(30, 82, 222, 0.6); /* sombra azul translúcida */
+  box-shadow: 0 8px 15px rgba(30,82,222,0.6);
 }
+
 
 .label{
   display: block;
