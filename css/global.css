@@ -48,6 +48,13 @@ justify-self: center;
   color: var(--cor-texto)
 }
 
+.title-h1 h1:hover {
+  background: linear-gradient(90deg, #000001, #1E52DE);
+  padding: 1.5rem 2.3rem;
+  transition: 0.4s;
+  box-shadow: 0 8px 15px rgba(30, 82, 222, 0.6); /* sombra azul translúcida */
+}
+
 .label{
   display: block;
 }
