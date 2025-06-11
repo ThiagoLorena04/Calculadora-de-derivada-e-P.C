@@ -4,7 +4,9 @@ const SUP = { "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5
 function norm(str) {
   return str
     .replace(/^[fy]\(x\)\s*=\s*|^y\s*=\s*/i, '')
-    .replace(/sen/gi, 'sin').replace(/tg/gi, 'tan')
+    .replace(/sen/gi, 'sin')
+    .replace(/tg/gi, 'tan')
+    .replace(/√\s*\(?([^)]+)\)?/g, 'sqrt($1)') 
     .replace(/\b(sin|cos|tan)\s*\(\s*([^)]*?)\s*\)/gi, (m, f, a) => `${f.toLowerCase()}(${a})`)
     .replace(/\b(sin|cos|tan)\s+([a-zA-Z]\w*)\b/gi, (m, f, a) => `${f.toLowerCase()}(${a})`)
     .replace(/\b(sin|cos|tan)([a-zA-Z]\w*)\b/gi, (m, f, a) => `${f.toLowerCase()}(${a})`)
@@ -12,7 +14,11 @@ function norm(str) {
     .split('').map(c => SUP[c] ? '^' + SUP[c] : c).join('');
 }
 
-const fmt = node => node.toString({ parenthesis: 'auto' }).replace(/\s*\*\s*/g, '');
+const fmt = node => node
+  .toString({ parenthesis: 'auto' })
+  .replace(/\s*\*\s*/g, '')
+  .replace(/sqrt\(([^)]+)\)/g, '√$1');
+
 
 /* Pontos críticos confiáveis: intervalo fixo [-3,3] */
 function roots(node, min = -3, max = 3, step = 0.1, eps = 1e-6) {

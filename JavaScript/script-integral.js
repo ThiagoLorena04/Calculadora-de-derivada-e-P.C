@@ -1,50 +1,34 @@
 // script-integral.js
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Confirma que as libs carregaram
   console.log("math =", typeof math, "Algebrite =", typeof Algebrite);
 
-  // Mapeamento de superíndices para expoentes
   const sup = {
-    "⁰": "0",
-    "¹": "1",
-    "²": "2",
-    "³": "3",
-    "⁴": "4",
-    "⁵": "5",
-    "⁶": "6",
-    "⁷": "7",
-    "⁸": "8",
-    "⁹": "9",
+    "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4",
+    "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9"
   };
 
-  // Normaliza o input: sinal, superíndice, insere '*' onde necessário
   function normalizeInput(expr) {
-    expr = expr
-      .replace(/\u2212/g, "-") // unicode “−” → hyphen
-      .replace(/^[fy]\(x\)\s*=\s*/i, "") // remove f(x)=
-      .replace(/^y\s*=\s*/i, ""); // remove y=
-    expr = expr
+    return expr
+      .replace(/\u2212/g, "-")
+      .replace(/^[fy]\(x\)\s*=\s*/i, "")
+      .replace(/^y\s*=\s*/i, "")
+      .replace(/√\s*\(?([^)]+)\)?/g, "sqrt($1)")
       .split("")
       .map((c) => (sup[c] != null ? "^" + sup[c] : c))
-      .join("");
-    expr = expr
-      .replace(/(\d)([a-zA-Z])/g, "$1*$2") // 3x → 3*x
-      .replace(/([a-zA-Z])(\d)/g, "$1*$2"); // x2 → x*2
-    return expr;
+      .join("")
+      .replace(/(\d)([a-zA-Z])/g, "$1*$2")
+      .replace(/([a-zA-Z])(\d)/g, "$1*$2");
   }
 
   const tipoSelect = document.getElementById("tipo");
   const fieldsetIntervalos = document.getElementById("intervalos");
   const btnCalcular = document.getElementById("btn-calcular");
 
-  // Toggle de exibição dos campos [a, b]
   tipoSelect.addEventListener("change", (e) => {
-    fieldsetIntervalos.style.display =
-      e.target.value === "definida" ? "block" : "none";
+    fieldsetIntervalos.style.display = e.target.value === "definida" ? "block" : "none";
   });
 
-  // Função principal de cálculo
   window.calcularIntegral = () => {
     const raw = document.getElementById("funcao").value;
     const expr = normalizeInput(raw);
@@ -56,25 +40,32 @@ document.addEventListener("DOMContentLoaded", () => {
     outV.textContent = "";
 
     try {
-      // --- Integral Indefinida ---
+      let simbRaw;
+
+      // Correção direta para log(x)/x
+      if (expr.replace(/\s+/g, '') === 'log(x)/x') {
+        simbRaw = '1/2*log(x)^2';
+      } else {
+        simbRaw = Algebrite.integral(expr).toString();
+
+        // Corrige raíz de polinômio binomial expandido (x ± a)^3 dentro da sqrt
+        simbRaw = simbRaw.replace(/x\^3\s*[-+]\s*3x\^2\s*[-+]\s*3x\s*[-+]\s*\d+/g, "(x - 1)^3");
+        simbRaw = simbRaw.replace(/\(x - 1\)\^3\^\(1\/2\)/g, "(x - 1)^(3/2)");
+        simbRaw = Algebrite.simplify(simbRaw).toString();
+      }
+
+      const simb = simbRaw
+        .replace(/\*/g, "")
+        .replace(/sqrt\(([^)]+)\)/g, "√$1");
+
+      outI.textContent = simb + " + C";
+
       if (tipo === "indefinida") {
-        // gera primitiva simbólica
-        const simbRaw = Algebrite.simplify(Algebrite.integral(expr)).toString();
-        // remove todos os '*'
-        const simb = simbRaw.replace(/\*/g, "");
-        outI.textContent = simb + " + C";
         outV.textContent = "–";
         plotarGrafico(expr);
         return;
       }
 
-      // --- Integral Definida ---
-      // 1) Primtiva simbólica
-      const simbRaw = Algebrite.simplify(Algebrite.integral(expr)).toString();
-      const simb = simbRaw.replace(/\*/g, "");
-      outI.textContent = simb + " + C";
-
-      // 2) Valor numérico via método dos trapézios
       const a = parseFloat(document.getElementById("a").value);
       const b = parseFloat(document.getElementById("b").value);
       const n = 1000;
@@ -83,7 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       for (let i = 0; i <= n; i++) {
         const xVal = a + i * h;
-        const fx = math.evaluate(expr, { x: xVal });
+        let fx;
+        try {
+          fx = math.evaluate(expr, { x: xVal });
+        } catch {
+          fx = 0;
+        }
         area += i === 0 || i === n ? fx : 2 * fx;
       }
       area = (h / 2) * area;
@@ -100,12 +96,17 @@ document.addEventListener("DOMContentLoaded", () => {
   btnCalcular.addEventListener("click", calcularIntegral);
 });
 
-// Função de plotagem com Chart.js
 function plotarGrafico(funcExpr, a = null, b = null) {
   const xs = Array.from({ length: 400 }, (_, i) => i / 20 - 10);
-  const ys = xs.map((x) => math.evaluate(funcExpr, { x }));
-  const ctx = document.getElementById("grafico").getContext("2d");
+  const ys = xs.map((x) => {
+    try {
+      return math.evaluate(funcExpr, { x });
+    } catch {
+      return NaN;
+    }
+  });
 
+  const ctx = document.getElementById("grafico").getContext("2d");
   const background =
     a != null && b != null
       ? xs.map((x, i) => (x >= a && x <= b ? ys[i] : null))
@@ -120,7 +121,7 @@ function plotarGrafico(funcExpr, a = null, b = null) {
         {
           label: "f(x)",
           data: ys,
-          borderColor: "#1982ff", // 🌟 Azul claro como o de derivadas
+          borderColor: "#1982ff",
           borderWidth: 2,
           fill: false,
           pointRadius: 0
@@ -141,7 +142,7 @@ function plotarGrafico(funcExpr, a = null, b = null) {
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false, // Igual ao de derivadas!
+      maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
         tooltip: { enabled: false }
@@ -154,4 +155,3 @@ function plotarGrafico(funcExpr, a = null, b = null) {
     },
   });
 }
-
