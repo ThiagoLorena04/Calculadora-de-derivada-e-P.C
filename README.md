@@ -4,6 +4,9 @@ Um projeto web interativo para calcular **derivadas (primeira e segunda), pontos
 
 ---
 
+## Alunos
+Thiago V. Lorena, Brian Evangelista, Gabriel Gasparotto, Ryan Lima. 
+
 ## Funcionalidades
 
 ✅ Derivada 1ª e 2ª (simbólica)  
