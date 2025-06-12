@@ -34,19 +34,19 @@
   text-align: left;
 }
 
-#fx-box label, p {
+#fx-box label,
+#fx-box p {
   box-sizing:border-box;
   border-radius:5px;
   background:var(--cor-fundo-input);
   font-family:'Poppins',sans-serif;
   font-size:0.9rem;
   font-weight:500;
-  width: 40%;
+  width: 100%;
   padding: 0.6rem 0.5rem 0.6rem 0.5rem;
   color: var(--cor-texto-input);
-  text-align: center;
-  justify-self: center;
-  /* margin-right: 10px; */
+  text-align: left;
+  margin-right: 10px;
 }
 
 #xval{

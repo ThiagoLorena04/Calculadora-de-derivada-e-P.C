@@ -1,6 +1,6 @@
 /* ===== helpers ===== */
-const SUP = {"⁰":"0","¹":"1","²":"2","³":"3","⁴":"4","⁵":"5","⁶":"6",
-             "⁷":"7","⁸":"8","⁹":"9"};
+const SUP = {"⁰":"0","¹":"1","²":"2","³":"3","⁴":"4","⁵":"5",
+             "⁶":"6","⁷":"7","⁸":"8","⁹":"9"};
 function norm(s){
   return s
     .replace(/^[fy]\(x\)\s*=|^y\s*=/i,'')
@@ -9,21 +9,23 @@ function norm(s){
     .replace(/(\d)(?=(sin|cos|tan)\()/gi,'$1*')
     .split('').map(c=>SUP[c]?'^'+SUP[c]:c).join('');
 }
-const fmt = n=>n.toString({parenthesis:'auto'})
-                .replace(/\s*\*\s*/g,'')
-                .replace(/sqrt\(([^)]+)\)/g,'√$1');
+const fmt=n=>n.toString({parenthesis:'auto'})
+              .replace(/\s*\*\s*/g,'')
+              .replace(/sqrt\(([^)]+)\)/g,'√$1');
 
-const BASE_RAW  = 'x^4 - 10*x^2 + 3*x + 20';
+/* === FUNÇÃO OFICIAL DO EXERCÍCIO === */
+const BASE_RAW  = 'x^3 - 10.5*x^2 + 30*x + 20';
 const BASE_NORM = norm(BASE_RAW);
-const vel       = n=>Math.round(n/1000)+' km/h';
 
-/* ===== roots (mesmo robusto) ===== */
+/* exibe com 1 casa decimal + km/h */
+const vel = n=>(+n).toFixed(1)+' km/h';
+
+/* ===== cálculo dos pontos críticos (mesmo robusto) ===== */
 function roots(node,{min=-10,max=10,grid=400,eps=1e-9,maxIter=25}={}){
   const fp=node.compile(), fp2=math.derivative(node,'x').compile();
   const out=new Set(), xs=[...Array(grid+1).keys()].map(i=>min+i*(max-min)/grid);
   const seen=v=>[...out].some(u=>Math.abs(u-v)<1e-3);
   const add=v=>out.add(+v.toFixed(4));
-
   for(let i=0;i<xs.length-1;i++){
     let a=xs[i], b=xs[i+1], fa=fp.evaluate({x:a}), fb=fp.evaluate({x:b});
     if(!isFinite(fa)||!isFinite(fb)||fa*fb>0) continue;
@@ -37,7 +39,7 @@ function roots(node,{min=-10,max=10,grid=400,eps=1e-9,maxIter=25}={}){
       const fx=fp.evaluate({x}), dfx=fp2.evaluate({x});
       if(Math.abs(dfx)<eps) break;
       const xn=x-fx/dfx;
-      if(Math.abs(xn-x)<1e-8){if(!seen(xn))add(xn);break;}
+      if(Math.abs(xn-x)<1e-8){ if(!seen(xn)) add(xn); break;}
       if(xn<min||xn>max) break;
       x=xn;
     }
@@ -85,18 +87,26 @@ function calcularDerivada(){
 
 /* ===== avaliar f(x) ===== */
 function avaliarFx(){
-  const raw = document.getElementById('funcao').value.trim();
+  const raw=document.getElementById('funcao').value.trim();
   const expr=norm(raw);
-  const box = document.getElementById('fx-box');
-  box.style.display = expr===BASE_NORM ? 'block':'none';
-  if(expr!==BASE_NORM){document.getElementById('valor-f').textContent='';return;}
+  const box=document.getElementById('fx-box');
+
+  /* mostra/esconde bloco */
+  box.style.display = expr===BASE_NORM ? 'block' : 'none';
+  if(expr!==BASE_NORM){
+    document.getElementById('valor-f').textContent='';
+    return;
+  }
 
   const xval=parseFloat(document.getElementById('xval').value);
   if(isNaN(xval)) return;
+
   try{
     const v=math.evaluate(expr,{x:xval});
     document.getElementById('valor-f').textContent = vel(v);
-  }catch{ document.getElementById('valor-f').textContent='Erro'; }
+  }catch{
+    document.getElementById('valor-f').textContent='Erro';
+  }
 }
 
 /* ===== gráfico ===== */
@@ -109,7 +119,7 @@ function plotarGrafico(fExpr,dExpr){
   if(chart) chart.destroy();
   chart=new Chart(ctx,{type:'line',
     data:{labels:X,datasets:[
-      {label:'f(x)', data:Yf,borderColor:'#1740B3',borderWidth:2,pointRadius:0},
+      {label:'f(x)',data:Yf,borderColor:'#1740B3',borderWidth:2,pointRadius:0},
       {label:"f'(x)",data:Yd,borderColor:'#1982ff',borderWidth:2,pointRadius:0,borderDash:[6,3]}
     ]},
     options:{plugins:{legend:{display:false}},

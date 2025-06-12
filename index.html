@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculadora de Derivadas</title>
 
-  <!-- Bibliotecas externas -->
+  <!-- libs -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="./css/style.css">
@@ -31,7 +31,7 @@
 
     <div class="grid-content-derivate">
       <div class="input-derivate">
-        <input class="input" id="funcao" placeholder="Ex: f(x) = x² - 4x + 3">
+        <input class="input" id="funcao" placeholder="Ex.: x^3 - 10.5*x^2 + 30*x + 20">
         <button class="btn" onclick="calcularDerivada()">Calcular</button>
       </div>
 
@@ -46,9 +46,10 @@
       </div>
     </div>
 
+    <!-- bloco de avaliação — hidden by default -->
     <div id="fx-box" style="display:none; margin-top:1rem;">
-      <label>Valor em x:</label>
-      <input type="number" id="xval" step="any" placeholder="ex.: 13">
+      <label class="label-x">Valor em x:</label>
+      <input type="number" id="xval" step="any" placeholder="ex.: 5">
       <button class="btn" id="btn-avalia">Avaliar f(x)</button>
       <p>f(x) = <span id="valor-f"></span></p>
     </div>

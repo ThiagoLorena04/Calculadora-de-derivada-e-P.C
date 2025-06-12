@@ -135,6 +135,9 @@
   font-size: 0.85rem;
 }
 
+#resultado .integrate p {
+  text-align: left;
+}
 .separator {
   margin-top: 3rem;
   margin-bottom: 3rem;
